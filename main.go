@@ -40,7 +40,6 @@ type dashboard struct {
 }
 
 func main() {
-
 	grafanaHost := os.Getenv("GRAFANA_HOST")
 	apiURL, err := url.Parse(grafanaHost)
 	if err != nil {
@@ -62,38 +61,37 @@ func main() {
 		fmt.Println("ERROR:", err)
 		os.Exit(1)
 	}
-
-	if resp.StatusCode == http.StatusOK {
-		// io.Copy(os.Stdout, resp.Body)
-		defer resp.Body.Close()
-		body, err := ioutil.ReadAll(resp.Body)
-		if err != nil {
-			fmt.Println("ERROR:", err)
-			os.Exit(1)
-		}
-		var dashboards []dashboard
-		err = json.Unmarshal(body, &dashboards)
-		if err != nil {
-			fmt.Println("ERROR:", err)
-			os.Exit(1)
-		}
-		var items []alfredItem
-		for _, dashboard := range dashboards {
-			item := alfredItem{
-				Arg:      dashboard.URL,
-				Title:    dashboard.Title,
-				Subtitle: dashboard.Title,
-				UID:      dashboard.UID,
-			}
-			items = append(items, item)
-		}
-		collection := alfredCollection{
-			Items: items,
-		}
-		jsonData, _ := json.Marshal(collection)
-		fmt.Println(string(jsonData))
-	} else {
+	if resp.StatusCode != http.StatusOK {
 		fmt.Println("ERROR: HTTP Response:", resp.StatusCode)
 		os.Exit(1)
 	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println("ERROR:", err)
+		os.Exit(1)
+	}
+
+	var dashboards []dashboard
+	err = json.Unmarshal(body, &dashboards)
+	if err != nil {
+		fmt.Println("ERROR:", err)
+		os.Exit(1)
+	}
+
+	var items []alfredItem
+	for _, dashboard := range dashboards {
+		item := alfredItem{
+			Arg:      dashboard.URL,
+			Title:    dashboard.Title,
+			Subtitle: dashboard.Title,
+			UID:      dashboard.UID,
+		}
+		items = append(items, item)
+	}
+	collection := alfredCollection{
+		Items: items,
+	}
+	jsonData, _ := json.Marshal(collection)
+	fmt.Println(string(jsonData))
 }
