@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"os"
+	"path"
 )
 
 type alfredCollection struct {
@@ -40,11 +42,16 @@ type dashboard struct {
 func main() {
 
 	grafanaHost := os.Getenv("GRAFANA_HOST")
-	apiURL := grafanaHost + "api/search"
+	apiURL, err := url.Parse(grafanaHost)
+	if err != nil {
+		fmt.Println("ERROR:", err)
+		os.Exit(1)
+	}
+	apiURL.Path = path.Join(apiURL.Path, "api/search")
 	grafanaUser := os.Getenv("GRAFANA_BASIC_AUTH_USER")
 	grafanaPassword := os.Getenv("GRAFANA_BASIC_AUTH_PASSWORD")
 	httpClient := &http.Client{}
-	req, err := http.NewRequest("GET", apiURL, nil)
+	req, err := http.NewRequest("GET", apiURL.String(), nil)
 	if err != nil {
 		fmt.Println("ERROR:", err)
 		os.Exit(1)
