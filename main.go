@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"os"
 	"path"
+	"strings"
 )
 
 type alfredCollection struct {
@@ -81,10 +82,20 @@ func main() {
 
 	var items []alfredItem
 	for _, dashboard := range dashboards {
+		targetURL, err := url.Parse(grafanaHost)
+		if err != nil {
+			fmt.Println("ERROR:", err)
+			os.Exit(1)
+		}
+		targetURL.Path = path.Join(targetURL.Path, dashboard.URL)
+		match := strings.ReplaceAll(dashboard.Title, "(", "")
+		match = strings.ReplaceAll(match, ")", "")
+		match = strings.ReplaceAll(match, "/", "")
 		item := alfredItem{
-			Arg:      dashboard.URL,
-			Title:    dashboard.Title,
+			Arg:      targetURL.String(),
+			Match:    match,
 			Subtitle: dashboard.Title,
+			Title:    dashboard.Title,
 			UID:      dashboard.UID,
 		}
 		items = append(items, item)
