@@ -9,6 +9,8 @@ import (
 	"os"
 	"path"
 	"strings"
+
+	"github.com/leejones/netrc"
 )
 
 type alfredCollection struct {
@@ -48,8 +50,21 @@ func main() {
 		os.Exit(1)
 	}
 	apiURL.Path = path.Join(apiURL.Path, "api/search")
+
 	grafanaUser := os.Getenv("GRAFANA_BASIC_AUTH_USER")
 	grafanaPassword := os.Getenv("GRAFANA_BASIC_AUTH_PASSWORD")
+	if grafanaUser == "" || grafanaPassword == "" {
+		fmt.Fprintf(os.Stderr, "load credentials: ENV vars not set: GRAFANA_BASIC_AUTH_USER, GRAFANA_BASIC_AUTH_PASSWORD\n")
+		basicAuth, err := netrc.Get(apiURL.Host)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "load credentials: unable to load from netrc: %v\n", err)
+		} else {
+			fmt.Fprintf(os.Stderr, "load credentials: found credentials in netrc\n")
+			grafanaUser = basicAuth.Username
+			grafanaPassword = basicAuth.Password
+		}
+	}
+
 	httpClient := &http.Client{}
 	req, err := http.NewRequest("GET", apiURL.String(), nil)
 	if err != nil {

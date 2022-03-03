@@ -20,3 +20,11 @@ If your Grafana instance is protected by HTTP basic auth, set the following vari
 
 * `GRAFANA_BASIC_AUTH_USER` - optional
 * `GRAFANA_BASIC_AUTH_PASSWORD` - optional
+
+Alternatively, you can define your Grafana basic auth username and password in your `~/.netrc` file:
+
+```
+machine example.com
+login my-username
+password my-password
+```
