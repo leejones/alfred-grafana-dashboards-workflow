@@ -12,8 +12,11 @@ make install
 
 ## Configuration
 
-Create a file named `~/.alfred-grafana-dashboards` with the following format and replace `https://example.com` with the address for your Grafana server.
+During installation, set the following required variables:
 
-```
-GRAFANA_HOST=https://example.com
-```
+* `GRAFANA_HOST` - required (e.g. `https://example.com/`)
+
+If your Grafana instance is protected by HTTP basic auth, set the following variables:
+
+* `GRAFANA_BASIC_AUTH_USER` - optional
+* `GRAFANA_BASIC_AUTH_PASSWORD` - optional

@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>com.leejones.grafana-dashboards</string>
+	<key>category</key>
+	<string>Tools</string>
 	<key>connections</key>
 	<dict>
 		<key>34E356C6-0798-4CD8-B76F-0F9F33B3C373</key>
@@ -15,6 +17,8 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 	</dict>
@@ -31,8 +35,10 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>plusspaces</key>
-				<false/>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
 				<key>url</key>
 				<string>{query}</string>
 				<key>utf8</key>
@@ -43,56 +49,57 @@
 			<key>uid</key>
 			<string>8FAFF89C-6785-48F3-AD9A-09F7AED457E9</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
-
-<dict>
-  <key>config</key>
-  <dict>
-    <key>alfredfiltersresults</key>
-    <true/>
-    <key>alfredfiltersresultsmatchmode</key>
-    <integer>2</integer>
-    <key>argumenttrimmode</key>
-    <integer>0</integer>
-    <key>argumenttype</key>
-    <integer>1</integer>
-    <key>escaping</key>
-    <integer>102</integer>
-    <key>keyword</key>
-    <string>grafana-dashboards</string>
-    <key>queuedelaycustom</key>
-    <integer>3</integer>
-    <key>queuedelayimmediatelyinitially</key>
-    <true/>
-    <key>queuedelaymode</key>
-    <integer>0</integer>
-    <key>queuemode</key>
-    <integer>1</integer>
-    <key>runningsubtext</key>
-    <string>Fetching dashboards</string>
-    <key>script</key>
-    <string>source ~/.alfred-grafana-dashboards &amp;&amp; bin/dashboards</string>
-    <key>scriptargtype</key>
-    <integer>0</integer>
-    <key>scriptfile</key>
-    <string></string>
-    <key>subtext</key>
-    <string></string>
-    <key>title</key>
-    <string>Search Grafana Dashboards</string>
-    <key>type</key>
-    <integer>0</integer>
-    <key>withspace</key>
-    <true/>
-  </dict>
-  <key>type</key>
-  <string>alfred.workflow.input.scriptfilter</string>
-  <key>uid</key>
-  <string>34E356C6-0798-4CD8-B76F-0F9F33B3C373</string>
-  <key>version</key>
-  <integer>2</integer>
-</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>grafana-dashboards</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Fetching dashboards</string>
+				<key>script</key>
+				<string>bin/dashboards</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search Grafana Dashboards</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>34E356C6-0798-4CD8-B76F-0F9F33B3C373</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -100,15 +107,36 @@
 	<dict>
 		<key>34E356C6-0798-4CD8-B76F-0F9F33B3C373</key>
 		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
 			<key>ypos</key>
 			<real>10</real>
 		</dict>
 		<key>8FAFF89C-6785-48F3-AD9A-09F7AED457E9</key>
 		<dict>
+			<key>xpos</key>
+			<integer>500</integer>
 			<key>ypos</key>
 			<real>10</real>
 		</dict>
 	</dict>
+	<key>variables</key>
+	<dict>
+		<key>GRAFANA_BASIC_AUTH_PASSWORD</key>
+		<string></string>
+		<key>GRAFANA_BASIC_AUTH_USER</key>
+		<string></string>
+		<key>GRAFANA_HOST</key>
+		<string></string>
+	</dict>
+	<key>variablesdontexport</key>
+	<array>
+		<string>GRAFANA_HOST</string>
+		<string>GRAFANA_BASIC_AUTH_PASSWORD</string>
+		<string>GRAFANA_BASIC_AUTH_USER</string>
+	</array>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string>https://leejones.github.io</string>
 </dict>
