@@ -4,6 +4,10 @@ An Alfred workflow to search your [Grafana](https://grafana.com) dashboards and 
 
 ## Installation
 
+Requirements:
+
+* [Go](https://go.dev) (see `go.mod` for recommended minimum version)
+
 Clone this repo and run:
 
 ```
