@@ -28,3 +28,12 @@ machine example.com
 login my-username
 password my-password
 ```
+
+If you don't have a `~/.netrc`, you can create one with:
+
+```
+# create the file
+touch ~/.netrc
+# set the file permissions so that other users cannot read it
+chmod 600 ~/.netrc
+```
